@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Marilia ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #ff9aa2, #ff4d6d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "Georgia", serif;
+}
+
+.envelope {
+  width: 340px;
+  height: 230px;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+  transition: transform 0.8s ease;
+  z-index: 2;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-top: 120px solid #ff4d6d;
+}
+
+.envelope.open {
+  transform: translateY(90px);
+}
+
+.card {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  width: 310px;
+  height: 190px;
+  background: #fffafc;
+  padding: 22px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+
+.envelope.open .card {
+  opacity: 1;
+  transform: translateY(-140px);
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: #d6336c;
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.signature {
+  margin-top: 12px;
+  font-style: italic;
+  color: #b5174c;
+}
+
+.hint {
+  position: absolute;
+  bottom: -38px;
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+}
+
+/* Corazones */
+.heart {
+  position: absolute;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.8);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openCard()">
+  <div class="card">
+    <h1>Para ti, Marilia ❤️</h1>
+    <p>
+      Si el mundo se detuviera ahora,<br>
+      yo igual te elegiría.<br>
+      Porque contigo todo tiene ritmo,<br>
+      sentido… y corazón.
+    </p>
+    <p>
+      Y si tú bailas conmigo,<br>
+      yo no necesito nada más.
+    </p>
+    <p class="signature">
+      Con Amor,<br>
+      tu bebé 💕
+    </p>
+  </div>
+  <div class="hint">Haz clic para abrir la carta 💌</div>
+</div>
+
+<audio id="music" loop>
+  <source src="juan_luis_guerra.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let opened = false;
+
+function openCard() {
+  const env = document.querySelector('.envelope');
+  const music = document.getElementById('music');
+
+  env.classList.toggle('open');
+
+  if (!opened) {
+    music.play().catch(() => {});
+    createHearts();
+    opened = true;
+  }
+}
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
